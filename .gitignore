@@ -26,6 +26,7 @@ MANIFEST
 # Virtual Environment
 venv/
 .env
+.venv/
 
 # Project specific exclusions
 report/

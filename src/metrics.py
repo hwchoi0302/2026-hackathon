@@ -1,43 +1,27 @@
 from qiskit import QuantumCircuit
-from qiskit.quantum_info import state_fidelity
 
-def calculate_fidelity(ideal_state, noisy_state) -> float:
+def analyze_transpiled_circuit(circuit: QuantumCircuit, backend, optimization_level: int = 2) -> dict:
     """
-    Calculates the fidelity between an ideal state and a noisy state.
+    Transpiles the circuit and analyzes the transpiled result metrics.
     
     Args:
-        ideal_state: Statevector or DensityMatrix of the ideal state.
-        noisy_state: Statevector or DensityMatrix of the noisy state.
+        circuit: The base QuantumCircuit.
+        backend: The target Qiskit backend.
+        optimization_level: Transpiler optimization level (0, 1, 2, or 3).
         
     Returns:
-        Fidelity (float between 0.0 and 1.0).
+        Dictionary with transpiled circuit metrics (depth, total_gates, two_qubit_gates, operations).
     """
-    return state_fidelity(ideal_state, noisy_state)
-
-def analyze_circuit(circuit: QuantumCircuit) -> dict:
-    """
-    Analyzes a Qiskit quantum circuit and extracts performance metrics.
+    from qiskit import transpile
     
-    Args:
-        circuit: Qiskit QuantumCircuit.
-        
-    Returns:
-        Dictionary containing depth, total gates, multi-qubit gates, etc.
-    """
-    ops = circuit.count_ops()
-    total_gates = sum(ops.values())
-    
-    depth = circuit.depth()
-    
-    # Calculate multi-qubit gates
-    from qiskit.converters import circuit_to_dag
-    dag = circuit_to_dag(circuit)
-    multi_qubit_gates = sum(1 for node in dag.op_nodes() if len(node.qargs) > 1)
+    # Transpile the circuit
+    transpiled_qc = transpile(circuit, backend=backend, optimization_level=optimization_level)
+    ops = transpiled_qc.count_ops()
     
     metrics = {
-        "depth": depth,
-        "total_gates": total_gates,
-        "multi_qubit_gates": multi_qubit_gates,
+        "depth": transpiled_qc.depth(),
+        "total_gates": sum(ops.values()),
+        "two_qubit_gates": transpiled_qc.num_nonlocal_gates(),
         "operations": dict(ops)
     }
     return metrics
