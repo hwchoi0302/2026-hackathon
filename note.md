@@ -1,11 +1,11 @@
 ### 개념들
 
 - Kyylov Quantum Diagonalization >>> 추후 공부하고 적용
-- ZNE
-- Noise learning
+- ZNE >>> 적용x
+- Noise learning >>> 적용 x
 - Symplectic
-- Gate twirling
-- PEA(Phase Esitmation Algorithm)
+- Gate twirling >>> DD
+- PEA(Phase Esitmation Algorithm) >>> nosie learning
 - OBP(Operator Back-Propagation)
 - Dynamic Decoupling
 - AQC
