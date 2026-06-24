@@ -1,0 +1,57 @@
+{
+    "exact_ground_energy": -6.205224403090305,
+    "exact_first_gap": 0.01229579,
+    "metrics": {
+        "Noiseless Lie": {
+            "fidelity": 0.983563,
+            "rmse": 0.084263,
+            "max_abs_error": 0.24654
+        },
+        "Noiseless Suzuki-2": {
+            "fidelity": 0.99691,
+            "rmse": 0.038476,
+            "max_abs_error": 0.07074
+        },
+        "Noiseless Suzuki-4": {
+            "fidelity": 0.999854,
+            "rmse": 0.008006,
+            "max_abs_error": 0.017522
+        },
+        "Fake Lie": {
+            "fidelity": 0.950117,
+            "rmse": 0.163405,
+            "max_abs_error": 0.363758
+        },
+        "Fake Suzuki-2": {
+            "fidelity": 0.8392,
+            "rmse": 0.267765,
+            "max_abs_error": 0.628489
+        },
+        "Real Lie (ibm_yonsei)": {
+            "fidelity": 0.931133,
+            "rmse": 0.173475,
+            "max_abs_error": 0.331884
+        },
+        "Real Suzuki-2 (ibm_yonsei)": {
+            "fidelity": 0.833146,
+            "rmse": 0.268594,
+            "max_abs_error": 0.733654
+        }
+    },
+    "fft_peaks": {
+        "real_lie": [
+            0.8333333333333333,
+            2.5
+        ],
+        "real_suzuki_2": [
+            1.0714285714285714,
+            2.619047619047619
+        ],
+        "noiseless_lie": [
+            0.5952380952380952
+        ],
+        "noiseless_suzuki_2": [
+            0.7142857142857142
+        ]
+    }
+}

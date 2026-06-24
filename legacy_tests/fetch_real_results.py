@@ -11,7 +11,7 @@ from src.hamiltonian import get_xyz_hamiltonian
 from src.circuit_builder import build_trotter_circuit
 from src.execution import get_estimator
 from src.analysis import perform_fft_analysis
-from scripts.generate_report import main as build_reports
+from legacy_tests.generate_report import main as build_reports
 
 # --- Submit Details ---
 LIE_JOB_ID = "d8tablkbp3hs73848log"
@@ -61,7 +61,7 @@ def main():
                 pass
             print("   You can safely turn off your laptop. Run this script again later once the job finishes.")
             return
-        elif lie_status != "COMPLETED":
+        elif lie_status not in ["COMPLETED", "DONE"]:
             print(f"   [Warning] Job status is {lie_status}. Job might have failed or been cancelled.")
             return
             
@@ -85,7 +85,7 @@ def main():
         for job in recent_jobs:
             if job.job_id() != LIE_JOB_ID and job.backend().name == "ibm_yonsei":
                 # Check tags or creation date
-                if job.creation_date() > lie_job.creation_date():
+                if job.creation_date > lie_job.creation_date:
                     suzuki_job_id = job.job_id()
                     print(f"   Auto-detected existing Suzuki-2nd Job ID: {suzuki_job_id}")
                     with open(SUZUKI_JOB_ID_FILE, 'w') as f:
@@ -150,7 +150,7 @@ def main():
             print("   [Queue Status] Suzuki-Trotter is still processing in the IBM Cloud backend.")
             print("   You can safely turn off your laptop. Run this script again later once the job finishes.")
             return
-        elif suz_status != "COMPLETED":
+        elif suz_status not in ["COMPLETED", "DONE"]:
             print(f"   [Warning] Job status is {suz_status}. Job might have failed.")
             return
             
