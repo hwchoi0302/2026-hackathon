@@ -1,0 +1,14 @@
+{
+    "AerSimulator": {
+        "t_2.0_depth": 191,
+        "t_2.0_2q_gates": 240,
+        "t_0.1_depth": 20,
+        "t_0.1_2q_gates": 24
+    },
+    "FakeBrisbane": {
+        "t_2.0_depth": 970,
+        "t_2.0_2q_gates": 243,
+        "t_0.1_depth": 114,
+        "t_0.1_2q_gates": 27
+    }
+}
