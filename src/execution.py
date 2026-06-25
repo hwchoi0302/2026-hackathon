@@ -4,7 +4,7 @@ from qiskit_aer.noise import NoiseModel
 from qiskit_ibm_runtime.options import EstimatorOptions
 from src.mitigation import configure_runtime_mitigation_options
 
-def get_estimator(mode: str, backend_instance=None, enable_dd: bool = True, dd_sequence: str = "XY4", enable_trex: bool = True):
+def get_estimator(mode: str, backend_instance=None, enable_dd: bool = True, dd_sequence: str = "XY4", enable_trex: bool = True, resilience_level: int = 1):
     """
     Returns the appropriate EstimatorV2 instance based on the execution mode.
     
@@ -14,6 +14,7 @@ def get_estimator(mode: str, backend_instance=None, enable_dd: bool = True, dd_s
         enable_dd: If True, enables Dynamic Decoupling (for 'real' mode).
         dd_sequence: DD sequence type ('XX', 'XY4').
         enable_trex: If True, enables twirled readout error mitigation (for 'real' mode).
+        resilience_level: Estimator resilience level (1 for TREX only, 2 for ZNE + TREX).
         
     Returns:
         An EstimatorV2 instance.
@@ -41,6 +42,7 @@ def get_estimator(mode: str, backend_instance=None, enable_dd: bool = True, dd_s
             raise ValueError("backend_instance is required for 'real' execution mode.")
             
         options = EstimatorOptions()
+        options.resilience_level = resilience_level
         # Set shots or other options if needed, then configure DD/TREX
         configure_runtime_mitigation_options(
             options, 
